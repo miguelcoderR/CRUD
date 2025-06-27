@@ -8,7 +8,7 @@ A lightweight web app for registering, editing, and deleting products in real ti
 
 - HTML5  
 - CSS3  
-- JavaScript (ES6+)  
+- JavaScript   
 
 
 
