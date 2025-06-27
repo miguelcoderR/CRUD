@@ -6,7 +6,7 @@ A lightweight web app for registering, editing, and deleting products in real ti
 
 ## 🚀 Technologies
 
-- HTML5  
+- HTML
 - CSS3  
 - JavaScript   
 
