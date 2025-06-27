@@ -1,92 +1,49 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #fa680d;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7fc;
   padding: 20px;
   margin: 0;
 }
 
 .contenedor {
-  max-width: 800px;
-  margin: 40px auto;
+  max-width: 700px;
+  margin: auto;
   background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
 h1 {
   text-align: center;
   color: #1a73e8;
-  margin-bottom: 20px;
 }
 
-input,
-button {
-  width: 100%;
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input, button {
+  margin: 10px 0;
   padding: 10px;
-  margin: 8px 0;
+  font-size: 1rem;
   border-radius: 6px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
-  font-size: 1rem;
 }
 
 button {
   background-color: #1a73e8;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  color: white;
   border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #125fc1;
+  background-color: #155ab6;
 }
 
-#inventarioLista {
-  margin-top: 20px;
-}
-
-.producto {
-  border-left: 4px solid #1a73e8;
-  background-color: #e9f0fd;
-  margin: 12px 0;
-  padding: 12px;
-  border-radius: 6px;
-}
-
-.acciones {
-  margin-top: 10px;
-}
-
-.acciones button {
-  margin-right: 8px;
-  width: auto;
-  padding: 6px 14px;
-  font-size: 0.9rem;
-}
-
-.acciones button.actualizar {
-  background-color: #ffc107;
-  color: #000;
-}
-
-.acciones button:hover {
-  opacity: 0.85;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .contenedor {
-    margin: 20px;
-    padding: 15px;
-  }
-  input,
-  button {
-    font-size: 0.9rem;
-  }
-  .acciones button {
-    padding: 6px 10px;
-    font-size: 0.8rem;
-  }
+#resultados {
+  margin-top: 25px;
 }
