@@ -1,92 +1,91 @@
-const productos = {};
-const productoSet = new Set();
+const products = {};
+const productsSet = new Set();
 
-document.getElementById("formularioProducto").addEventListener("submit", function (e) {
+document.getElementById("Product form").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const precio = parseFloat(document.getElementById("precio").value);
-  const cantidad = parseInt(document.getElementById("cantidad").value);
+  const name = document.getElementById("name").value.trim();
+  const price = parseFloat(document.getElementById("price").value);
+  const quantity = parseInt(document.getElementById("quantity").value);
 
-  if (!nombre || isNaN(precio) || isNaN(cantidad) || precio < 0 || cantidad < 0) {
+  if (!name || isNaN(price) || isNaN(quantity) || price < 0 || quantity < 0) {
     alert("Por favor, completa correctamente todos los campos.");
     return;
   }
 
-  const nombreExiste = Object.values(productos).some(p => p.nombre.toLowerCase() === nombre.toLowerCase());
-  if (nombreExiste) {
-    alert("Este producto ya existe. No se permiten duplicados.");
+  const nameExists = Object.values(products).some(p => p.name.toLowerCase() === name.toLowerCase());
+  if (nameExists) {
+    alert("This product already exists. Duplicates are not allowed.");
     return;
   }
 
   const id = Date.now();
-  const nuevoProducto = { id, nombre, precio, cantidad };
-  const claveSet = JSON.stringify(nuevoProducto);
+  const newproduct = { id, name: name, price: price, quantity: quantity };
+  const Setkey = JSON.stringify(newproduct);
 
-  productoSet.add(claveSet);
-  productos[`prod${id}`] = nuevoProducto;
+  productsSet.add(Setkey);
+  products[`prod${id}`] = newproduct;
 
-  mostrarResultados();
+  showresults();
   this.reset();
 });
 
-function mostrarResultados() {
-  const salida = document.getElementById("resultados");
-  salida.innerHTML = "<h3>📦 Productos registrados</h3>";
+function showresults() {
+  const exit = document.getElementById("results");
+  exit.innerHTML = "<h3>📦 Registered products</h3>";
 
-  for (const clave in productos) {
-    const p = productos[clave];
-    salida.innerHTML += `
-      <div class="producto">
-        <strong>${p.nombre}</strong><br>
-        Precio: $${p.precio}<br>
-        Cantidad: ${p.cantidad}<br>
-        <button onclick="editarProducto('${clave}')">✏️ Editar</button>
-        <button onclick="eliminarProducto('${clave}')">🗑️ Eliminar</button>
-      </div>
-    `;
+  for (const key in products) {
+    const p = products[key];
+    exit.innerHTML += `
+      <div class="product">
+        <strong>${p.name}</strong><br>
+        Price: $${p.price}<br>
+        quantity: ${p.quantity}<br>
+        <button onclick="editproduct('${key}')">✏️ Edit</button>
+        <button onclick="deleteProduct('${key}')">🗑️ Delete</button>
+      </div>`;
   }
 }
 
-function editarProducto(clave) {
-  const p = productos[clave];
-  const nuevoNombre = prompt("Nuevo nombre:", p.nombre);
-  const nuevoPrecio = parseFloat(prompt("Nuevo precio:", p.precio));
-  const nuevaCantidad = parseInt(prompt("Nueva cantidad:", p.cantidad));
+function editProduct(key) {
+  const p = products[key];
+  const newname = prompt("new name:", p.name);
+  const newprice = parseFloat(prompt("new price:", p.price));
+  const newquantity = parseInt(prompt("new quantify:", p.quantity));
 
-  if (!nuevoNombre || isNaN(nuevoPrecio) || nuevoPrecio < 0 || isNaN(nuevaCantidad) || nuevaCantidad < 0) {
-    alert("Valores inválidos.");
+  if (!newname || isNaN(newprice) || newprice < 0 || isNaN(newquantity) || newquantity < 0) {
+    alert("Invalid values.");
     return;
   }
 
-  const existeNombre = Object.values(productos).some(
-    prod => prod.nombre.toLowerCase() === nuevoNombre.toLowerCase() && prod.id !== p.id
+  const existsName = Object.values(products).some(
+    prod => prod.name.toLowerCase() === newname.toLowerCase() && prod.id !== p.id
   );
-  if (existeNombre) {
-    alert("Ya existe un producto con ese nombre.");
+  if (existsName) {
+    alert("There is already a product with that name.");
     return;
   }
 
-  p.nombre = nuevoNombre;
-  p.precio = nuevoPrecio;
-  p.cantidad = nuevaCantidad;
+  p.name = newname;
+  p.price = newprice;
+  p.quantity = newquantity;
 
-  mostrarResultados();
+  showresults();
 }
 
-function eliminarProducto(clave) {
-  if (confirm("¿Seguro que deseas eliminar este producto?")) {
-    const prod = productos[clave];
-    delete productos[clave];
+function deleteproduct(key) {
+  if (confirm("¿Are you sure you want to delete this product?")) {
+    const prod = products[key];
+    delete products[key];
 
-    for (let item of productoSet) {
+    for (let item of productsSet) {
       const obj = JSON.parse(item);
       if (obj.id === prod.id) {
-        productoSet.delete(item);
+        productsSet.delete(item);
         break;
       }
     }
 
-    mostrarResultados();
+    showresults();
   }
 }
